@@ -1,0 +1,33 @@
+{
+  "name": "watchify-request",
+  "version": "1.0.0",
+  "description": "Wraps a watchify instance into an HTTP request handler",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {},
+  "author": {
+    "name": "Hugh Kennedy",
+    "email": "hughskennedy@gmail.com",
+    "url": "http://hughsk.io/"
+  },
+  "dependencies": {
+    "bl": "^0.9.3",
+    "events": "^1.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hughsk/watchify-request.git"
+  },
+  "keywords": [
+    "watchify",
+    "browserify",
+    "http",
+    "request",
+    "server"
+  ],
+  "homepage": "https://github.com/hughsk/watchify-request",
+  "bugs": {
+    "url": "https://github.com/hughsk/watchify-request/issues"
+  }
+}
