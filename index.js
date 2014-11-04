@@ -5,6 +5,7 @@ var bl      = require('bl')
 module.exports = wreq
 
 function wreq(bundler) {
+  var prevError = false
   var pending = false
   var buffer
 
@@ -23,6 +24,8 @@ function wreq(bundler) {
       })
     }
 
+    if (prevError) return next(prevError)
+
     res.setHeader('content-type', 'text/javascript')
     return res.end(buffer)
   }
@@ -33,7 +36,7 @@ function wreq(bundler) {
     bundler.bundle().pipe(bl(function(err, _buffer) {
       if (p !== pending) return
       buffer = _buffer
-      pending.emit('ready', err, pending = false)
+      pending.emit('ready', prevError = err, pending = false)
     }))
   }
 }
