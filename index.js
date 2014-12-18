@@ -1,21 +1,30 @@
 var Emitter = require('events/')
-var noop    = (function(){})
 var bl      = require('bl')
 
 module.exports = wreq
 
 function wreq(bundler) {
-  var prevError = false
-  var pending = false
-  var buffer
+  var prevError = null
+  var pending = null
+  var buffer = null
 
   update()
   bundler.on('update', update)
 
   return handler
 
+  function update() {
+    var p = pending = new Emitter
+
+    bundler.bundle().pipe(bl(function(err, _buffer) {
+      if (p !== pending) return
+      buffer = _buffer
+      pending.emit('ready', prevError = err, pending = false)
+    }))
+  }
+
   function handler(req, res, next) {
-    next = next || noop
+    next = next || send
 
     if (pending) {
       return pending.once('ready', function(err) {
@@ -27,16 +36,12 @@ function wreq(bundler) {
     if (prevError) return next(prevError)
 
     res.setHeader('content-type', 'text/javascript')
-    return res.end(buffer)
-  }
 
-  function update() {
-    var p = pending = new Emitter
+    return next(null, buffer)
 
-    bundler.bundle().pipe(bl(function(err, _buffer) {
-      if (p !== pending) return
-      buffer = _buffer
-      pending.emit('ready', prevError = err, pending = false)
-    }))
+    function send(err, body) {
+      if (err) return res.emit(err)
+      res.end(body)
+    }
   }
 }
