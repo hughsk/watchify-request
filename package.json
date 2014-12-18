@@ -1,6 +1,6 @@
 {
   "name": "watchify-request",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Wraps a watchify instance into an HTTP request handler",
   "main": "index.js",
   "license": "MIT",
