@@ -19,6 +19,10 @@ Handles the request, where `req` is an `HTTPRequest` instance and `res` is its
 matching `HTTPResponse` instance. `done(err)` is optional, and called if the
 request isn't handled for some reason, generally in the case of an error.
 
+## See also
+- [myth-request](https://github.com/yoshuawuyts/myth-request)
+- [koa-watchify](https://github.com/yoshuawuyts/koa-watchify)
+
 ## License
 
 MIT. See [LICENSE.md](http://github.com/hughsk/watchify-request/blob/master/LICENSE.md) for details.
