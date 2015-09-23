@@ -16,8 +16,9 @@ Creates a request handler out of a `watchify` or `browserify` instance.
 ### `handler(req, res[, done])`
 
 Handles the request, where `req` is an `HTTPRequest` instance and `res` is its
-matching `HTTPResponse` instance. `done(err)` is optional, and called if the
-request isn't handled for some reason, generally in the case of an error.
+matching `HTTPResponse` instance. `done(err, body)` is optional, and called if
+you want to add a custom error handler or manipulate the request after
+`browserify` is done.
 
 ## See also
 - [myth-request](https://github.com/yoshuawuyts/myth-request)
