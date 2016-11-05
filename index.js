@@ -35,7 +35,7 @@ function wreq(bundler) {
 
     if (prevError) return next(prevError)
 
-    res.setHeader('content-type', 'text/javascript')
+    if (res) res.setHeader('content-type', 'text/javascript')
 
     return next(null, buffer)
 
